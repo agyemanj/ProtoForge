@@ -177,7 +177,7 @@ const specs = {
 		deployToTeam: "<undefined>",
 		deployToApp: "<undefined>",
 		deployToPipeline: "<undefined>",
-		provisionDbFrom: "<undefined>",
+		provisionDbFrom: "heroku",
 		provisionSmtpFrom: "<undefined>",
 		provisionObjectStoreFrom: "<undefined>",
 	},
