@@ -1,0 +1,26 @@
+node_modules
+
+# build
+*.tsbuildinfo
+dist
+
+# logs/reports
+*.run.json
+*.log
+
+# tools
+.idea
+workspace.xml
+.eslintcache
+.cache
+.vscode
+.vs
+.npm
+
+# os
+.DS_Store
+thumbs.db
+desktop.ini
+
+# misc
+.env
