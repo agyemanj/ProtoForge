@@ -9,10 +9,10 @@ RUN sudo apt install nodejs -y
 RUN sudo chown -R $(whoami) ~/.npm
 
 COPY package*.json ./
-
 RUN npm install
 # RUN npm ci --only-production
 
+RUN npm run build
 COPY ./dist .
 
 # Run the server script and start the server
