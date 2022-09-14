@@ -18,13 +18,14 @@ import { routesFactory } from './routes'
 import { app } from '../common'
 
 const serverEnvKeys = keys(defaultEnv)
-serverEnvKeys.forEach(key => { if (!hasValue(process.env[key])) throw `${key} env variable not found` })
+// serverEnvKeys.forEach(key => { if (!hasValue(process.env[key])) throw `${key} env variable not found` })
 const serverEnv: KeysToCamelCase<ServerEnv> = camelize(objectFromTuples(serverEnvKeys.map(key => new Tuple(key, process.env[key]!))))
 
+if (!hasValue(process.env["DATABASE_URL"]))
+	throw `DATABASE_URL env variable not found`
 const db = new PostgresRepository({ dbUrl: process.env.DATABASE_URL! })
 const rootHTML = fs.readFileSync(`${__dirname}/public/root.html`).toString()
 
-// const routes = routesFactory(db, rootHTML)
 const {
 	home,
 	requestLogger,
@@ -44,7 +45,6 @@ const {
 	defaultAll
 } = routesFactory(db, rootHTML, __dirname, serverEnv)
 
-// console.log(`Starting server; app name: ${appName}`)
 startExpressServer({
 	name: app.name,
 	routes: [
@@ -70,8 +70,6 @@ startExpressServer({
 	],
 	port: serverEnv.port
 })
-
-
 
 /* app.use(helmet())
 	// app.use(helmet.noCache())
